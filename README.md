@@ -5,7 +5,7 @@ ___
 ___
 Nodes are a basic data structure which contain data and one or more links to other nodes. Nodes can be used to represent a tree structure or a linked list. In such structures where nodes are used, it is possible to traverse from one node to another node.
 
-<details open><summary><em><b>Many Nodes</b></em></summary>
+<details><summary><em><b>Many Nodes</b></em></summary>
 <br>
 
 ![many nodes](https://content.codecademy.com/practice/art-for-practice/many-nodes.png)
@@ -80,7 +80,7 @@ In a linked list data is stored in nodes and each node is linked to the next and
 1. A pointer (Or reference) to the next node 
 1. Optionally, a pointer to the previous node
 
-<details open><summary><em><b>Linked List</b></em></summary>
+<details><summary><em><b>Linked List</b></em></summary>
 <br>
 
 ![linked list](https://www.geeksforgeeks.org/wp-content/uploads/gq/2013/03/Linkedlist.png)
@@ -105,7 +105,7 @@ When adding a new node to the start of a linked list, it is necessary to maintai
 ### The Head Node in Linked Lists
 The first node in a linked list is called the head node. If the linked list is empty, then the value of the head node is `NULL`.
 
-<details open><summary><em><b>Linked List Head Node</b></em></summary>
+<details><summary><em><b>Linked List Head Node</b></em></summary>
 <br>
 
 ![linked list head node](https://cdn-images-1.medium.com/max/2560/1*GOKmkucFHN_gmTMUtyC2sQ.png)
@@ -506,7 +506,7 @@ ___
 ___
 A _stack_ is a data structure that follows a last in, first out (LIFO) protocol. The latest node added to a stack is the node which is eligible to be removed first. If three nodes (`a`, `b` and, `c`) are added to a stack in this exact same order, the node `c` must be removed first. The only way to remove or return the value of the node `a` is by removing the nodes `c` and `b`.
 
-<details open ><summary><em><b>Stack</b></em></summary>
+<details ><summary><em><b>Stack</b></em></summary>
 <br>
 
 ![stack](https://content.codecademy.com/practice/art-for-practice/stack.png)
@@ -638,3 +638,159 @@ incorrect_hash_map = {
 
 </details>
 <br>
+
+### Creating the Hash Map Class
+Hash maps are efficient key-value stores. They are capable of assigning and retrieving data in the fastest way possible for a data structure. This is because the underlying data structure that they use is an array. A value is stored at an array index determined by plugging the key into a hash function.
+
+In Python we don’t have an array data structure that uses a contiguous block of memory. We are going to simulate an array by creating a list and keeping track of the size of the list with an additional integer variable. This will allow us to design something that resembles a hash map. This is somewhat elaborate for the actual storage of a key-value pair, but it helps to remember that the purpose of this lesson is to gain a deeper understanding of the structure as it is constructed. For real-world use cases in which a key-value store is needed, Python offers a built-in hash table implementation with dictionaries.
+
+___
+## Trees
+___
+A _Tree_ data structure is composed of multiple nodes.
+
+### Wide and deep trees
+There are two ways to describe the shape of a tree. Trees can be _wide_, meaning that each node has many children. And trees can be _deep_, meaning that there are many parent-child connections with few siblings per node. Trees can be both _wide_ and _deep_ at the same time.
+
+### Nodes as parents
+Trees in computer science are often talked about similarly to family trees. A tree node that references one or more other nodes is called a “parent”.
+
+A tree node can be a “parent” and a “child” simultaneously, because they are not exclusive. For instance, a node ‘b’ can be the child of node ‘a’, while being the parent to nodes ‘d’ and ‘e’. However, a child can only have one parent, while a parent can have multiple children.
+
+### Trees are composed of nodes
+Trees are a data structure composed of nodes used for storing hierarchical data.
+
+Each tree node typically stores a value and references to its child nodes.
+
+### Tree nodes children
+A tree node contains a value, and can also include references to one or more additional tree nodes which are known as “children”.
+
+### Node root
+In a tree data structure, the node that is not the child of any other node is called the _root_ of the tree. A tree can only have one root.
+
+### Python TreeNode class
+
+A __TreeNode__ is a data structure that represents one entry of a tree, which is composed of multiple of such nodes.
+
+The topmost node of a tree is called the “root”, and each node (with the exception of the root node) is associated with one parent node. Likewise, each node can have an arbitrary number of child nodes. An implementation of a `TreeNode` class in Python should have functions to add nodes, remove nodes, and traverse nodes within the tree.
+
+<details ><summary><em><b>TreeNode Class</b></em></summary>
+<br>
+
+```python
+class TreeNode:
+  def __init__(self, value):
+    self.value = value # data
+    self.children = [] # references to other nodes
+ 
+  def add_child(self, child_node):
+    # creates parent-child relationship
+    print("Adding " + child_node.value)
+    self.children.append(child_node) 
+    
+  def remove_child(self, child_node):
+    # removes parent-child relationship
+    print("Removing " + child_node.value + " from " + self.value)
+    self.children = [child for child in self.children 
+                     if child is not child_node]
+ 
+  def traverse(self):
+    # moves through each node referenced from self downwards
+    nodes_to_visit = [self]
+    while len(nodes_to_visit) > 0:
+      current_node = nodes_to_visit.pop()
+      print(current_node.value)
+      nodes_to_visit += current_node.children
+```
+
+</details>
+<br>
+
+___
+## Heaps
+___
+
+### Heap Implementation
+Heaps are typically implemented with a data structure such as an array or Python list. These sequential structures allow access to elements in a particular order which is key to efficient use of heaps. Although binary trees are helpful for understanding the relationships between nodes of a heap, implementation using a tree is less efficient for storage and retrieval of elements.
+
+<details ><summary><em><b>Heaps</b></em></summary>
+<br>
+
+![heaps](https://content.codecademy.com/practice/art-for-practice/new-pngs/heaps-representation.png)
+
+
+</details>
+<br>
+
+### Adding Elements: Heapify Up
+When a new element is added to a heap, if heap properties are violated, the new child must swap with its parent until both child and root properties are restored. This process is called _heapifying up_, because of the upwards movement of the new element in this restorative process.
+
+<details ><summary><em><b>Heapify Up</b></em></summary>
+<br>
+
+![heap up](https://content.codecademy.com/programs/cs-path/heaps-conceptual/heapup.gif)
+
+
+</details>
+<br>
+
+### Heaps as Binary Trees
+A proper representation of a heap is a _complete binary tree_, which is a [tree](#trees) whose nodes have at most two children, and whose levels are filled completely from left to right (with no gaps in children). It’s possible for the last level to be semi-completely filled, but all of its nodes are as far left as possible.
+
+<details  ><summary><em><b>Heaps - Binary Tree</b></em></summary>
+<br>
+
+![heaps as Binary Tree](https://content.codecademy.com/practice/art-for-practice/new-pngs/heaps-intro.png)
+
+
+</details>
+<br>
+
+### The Heap Class
+The basis of a Heap class in Python is the implementation of a heap with a list, based on the parent-child relationships that a binary tree structure portrays. The class also consists of multiple methods that provide the functionality to construct these parent-child relationships in the list, add elements, remove the root element, and heapify in both directions when necessary.
+
+<details ><summary><em><b>Heap Class</b></em></summary>
+<br>
+
+```python
+class MinHeap:
+  "Some key methods to be included in the MinHeap class"
+  
+  def __init__(self):
+    "Creates a list and count variable"
+    self.heap_list = [None]
+    self.count = 0
+    
+  def retrieve_min(self):
+    "Replaces root with last child, calls .heapify-down()"
+    
+  def add(self, element):
+    "Adds new element to heap_list, calls heapify_up()"
+    
+  def get_smaller_child_idx(self, idx):
+    "Returns the child a parent should swap with"
+    
+  def heapify_up(self): 
+    "Implements heapify up"
+    
+  def heapify_down(self):
+    "Implements heapify down"
+```
+
+</details>
+<br>
+
+## Recursion
+
+## Asymptotic Notation
+
+## Pattern Searching
+
+## Sorting Algorithms
+
+## Brute Force Algorithms
+
+
+
+## Notes
+-  [Blossom Gist](https://gist.github.com/0740619f7bf684f346825253d6613fbe)
